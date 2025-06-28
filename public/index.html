@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lo-Fi Vibes</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #1e1e1e;
+      color: #fff;
+      text-align: center;
+      padding: 50px;
+    }
+    iframe {
+      border: none;
+      margin-top: 30px;
+      width: 80%;
+      height: 450px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    }
+    select, button {
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 Lo-Fi Vibes</h1>
+  <p id="quote">Choose a mood to begin.</p>
+
+  <select id="moodSelect">
+    <option value="study">Study</option>
+    <option value="relax">Relax</option>
+  </select>
+  <button onclick="loadMood()">Set Mood</button>
+
+  <iframe id="player" allowfullscreen></iframe>
+
+  <script>
+    async function loadMood() {
+      const mood = document.getElementById('moodSelect').value;
+
+      const trackRes = await fetch('/track');
+      const trackData = await trackRes.json();
+
+      const quoteRes = await fetch(`/mood?vibe=${mood}`);
+      const quoteData = await quoteRes.json();
+
+      document.getElementById('player').src = trackData.url;
+      document.getElementById('quote').textContent = quoteData.quote;
+    }
+
+    // Load one by default
+    window.onload = loadMood;
+  </script>
+</body>
+</html>
