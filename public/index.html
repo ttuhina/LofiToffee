@@ -1,61 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Lo-Fi Vibes</title>
   <style>
+    :root {
+      --text-color: #ffffff;
+      --shadow-color: rgba(0, 0, 0, 0.6);
+    }
+
+    body.light {  
+      --text-color: #222222;
+      --shadow-color: rgba(0, 0, 0, 0.2);
+    }
+
     body {
       font-family: 'Helvetica Neue', sans-serif;
-      background: #1e1e1e;
-      color: #fff;
+      color: var(--text-color);
       text-align: center;
       padding: 50px;
+      margin: 0;
+      min-height: 100vh;
+      transition: all 0.8s ease;
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
     }
+
+    /* Default/Study mood - Darker blues and purples */
+    body, body.study {
+      background: linear-gradient(45deg, #0d0d1a, #0a1220, #061c35, #2a1b4d);
+    }
+
+    body.relax {
+      background: linear-gradient(45deg, #1a2c0a, #2e4a35, #3d5544, #4a6b3a);
+    }
+
+    body.focus {
+      background: linear-gradient(45deg, #6b0940, #a02d3f, #b8855a, #4a9a9a);
+    }
+
+    body.chill {
+      background: linear-gradient(45deg, #2a1a7a, #3e4084, #1a1c40, #0a0920);
+    }
+
+    body.sleepy {
+      background: linear-gradient(45deg, #1a1a35, #252547, #404078, #5a5a8a);
+    }
+
+    /* Light theme variations - darker versions */
+    body.light.study {
+      background: linear-gradient(45deg, #9b8db8, #8a75c4, #6b4fa8, #5a3d87);
+    }
+
+    body.light.relax {
+      background: linear-gradient(45deg, #7a9b6e, #6b8a5c, #4a6b3a, #3d5a2e);
+    }
+
+    body.light.focus {
+      background: linear-gradient(45deg, #b8855a, #a86b34, #8a4a0f, #7a3e06);
+    }
+
+    body.light.chill {
+      background: linear-gradient(45deg, #8a9bcf, #5a75b8, #2e4a9b, #1a2e7a);
+    }
+
+    body.light.sleepy {
+      background: linear-gradient(45deg, #a89bcf, #8a75b8, #5e4a8a, #3e2a6a);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 100% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 0% 100%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px var(--shadow-color);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 2px 2px 4px var(--shadow-color), 0 0 10px rgba(255,255,255,0.1); }
+      to { text-shadow: 2px 2px 4px var(--shadow-color), 0 0 20px rgba(255,255,255,0.2); }
+    }
+
+    #quote {
+      font-size: 1.2em;
+      font-style: italic;
+      margin: 20px 0;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     iframe {
       border: none;
       margin-top: 30px;
       width: 80%;
+      max-width: 800px;
       height: 450px;
       border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 8px 32px var(--shadow-color);
+      transition: box-shadow 0.3s ease;
     }
+
+    iframe:hover {
+      box-shadow: 0 12px 48px var(--shadow-color);
+    }
+
     select, button {
       margin: 10px;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 12px 24px;
+      border-radius: 25px;
       border: none;
       font-size: 16px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-color);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    button:hover, select:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #controls {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .mood-indicator {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 10px 0;
+      font-size: 0.9em;
+      backdrop-filter: blur(5px);
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 20px; }
+      h1 { font-size: 2em; }
+      iframe { width: 95%; height: 300px; }
+      #controls { flex-direction: column; }
     }
   </style>
 </head>
-<body>
+<body class="study">
   <h1>🎵 Lo-Fi Vibes</h1>
-  <p id="quote">Choose a mood to begin.</p>
+  <div class="mood-indicator" id="moodIndicator">📚 Study Mode</div>
+  <p id="quote">Choose a mood to begin your journey.</p>
 
-  <select id="moodSelect">
-    <option value="study">Study</option>
-    <option value="relax">Relax</option>
-  </select>
-  <button onclick="loadMood()">Set Mood</button>
+  <div id="controls">
+    <select id="moodSelect">
+      <option value="study">📚 Study</option>
+      <option value="relax">🧘 Relax</option>
+      <option value="focus">🎯 Focus</option>
+      <option value="chill">🌴 Chill</option>
+      <option value="sleepy">😴 Sleepy</option>
+    </select>
+    <button onclick="loadMood()">⏭️ Skip Track</button>
+    <button onclick="toggleTheme()">Dark/Light Mode</button>
+  </div>
 
-  <iframe id="player" allowfullscreen></iframe>
+  <iframe id="player" src="https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1" allowfullscreen></iframe>
 
   <script>
-    async function loadMood() {
+    const moodData = {
+      study: {
+        quotes: [
+          "Focus is the gateway to thinking clearly.",
+          "Success is where preparation and opportunity meet.",
+          "The expert in anything was once a beginner.",
+          "Knowledge is power, but knowledge shared is power multiplied."
+        ],
+        tracks: [
+          "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/DWcJFNfaw9c?autoplay=1&loop=1"
+        ],
+        emoji: "📚",
+        name: "Study Mode"
+      },
+      relax: {
+        quotes: [
+          "Take time to make your soul happy.",
+          "Breathe in peace, breathe out stress.",
+          "Sometimes you need to sit lonely on the floor to appreciate the beauty of silence.",
+          "Relaxation is not a luxury, it's a necessity."
+        ],
+        tracks: [
+          "https://www.youtube.com/embed/36YnV9STBqc?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/lTRiuFIWV54?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=1&loop=1"
+        ],
+        emoji: "🧘",
+        name: "Relax Mode"
+      },
+      focus: {
+        quotes: [
+          "Where focus goes, energy flows.",
+          "Concentrate all your thoughts upon the work at hand.",
+          "The successful warrior is the average person with laser-like focus.",
+          "Focus is about saying no to the hundred other good ideas."
+        ],
+        tracks: [
+          "https://www.youtube.com/embed/2gkwZqHccA0?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/0r6C3z3TEKw?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/wAPCSnAhhC8?autoplay=1&loop=1"
+        ],
+        emoji: "🎯",
+        name: "Focus Mode"
+      },
+      chill: {
+        quotes: [
+          "Life is good when you're living it easy.",
+          "Chill out, life's too short to stress about everything.",
+          "Find your flow and let it carry you.",
+          "Sometimes the most productive thing you can do is relax."
+        ],
+        tracks: [
+          "https://www.youtube.com/embed/kgx4WGK0oNU?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/WPni755-Krg?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/BlyCGMTbKHE?autoplay=1&loop=1"
+        ],
+        emoji: "🌴",
+        name: "Chill Mode"
+      },
+      sleepy: {
+        quotes: [
+          "Sleep is the best meditation.",
+          "Rest when you're weary. Refresh and renew yourself.",
+          "A good laugh and a long sleep are the two best cures.",
+          "Sleep is the golden chain that ties health and our bodies together."
+        ],
+        tracks: [
+          "https://www.youtube.com/embed/rUxyL1rTqvM?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/WeAjD6Jv-Hs?autoplay=1&loop=1",
+          "https://www.youtube.com/embed/eHnGwDy2y4s?autoplay=1&loop=1"
+        ],
+        emoji: "😴",
+        name: "Sleepy Mode"
+      }
+    };
+
+    let currentTrackIndex = 0;
+
+    function loadMood() {
       const mood = document.getElementById('moodSelect').value;
-
-      const trackRes = await fetch('/track');
-      const trackData = await trackRes.json();
-
-      const quoteRes = await fetch(`/mood?vibe=${mood}`);
-      const quoteData = await quoteRes.json();
-
-      document.getElementById('player').src = trackData.url;
-      document.getElementById('quote').textContent = quoteData.quote;
+      const data = moodData[mood];
+      
+      // Remove all mood classes and add the selected one
+      document.body.className = document.body.classList.contains('light') ? 'light ' + mood : mood;
+      
+      // Update mood indicator
+      document.getElementById('moodIndicator').textContent = `${data.emoji} ${data.name}`;
+      
+      // Get random quote
+      const randomQuote = data.quotes[Math.floor(Math.random() * data.quotes.length)];
+      document.getElementById('quote').textContent = randomQuote;
+      
+      // Load next track for this mood
+      const trackUrl = data.tracks[currentTrackIndex % data.tracks.length];
+      document.getElementById('player').src = trackUrl;
+      currentTrackIndex++;
+      
+      // Store preferences (but remember we can't use localStorage in artifacts)
+      console.log(`Mood changed to: ${mood}`);
     }
 
-    // Load one by default
-    window.onload = loadMood;
+    function toggleTheme() {
+      const body = document.body;
+      const currentMood = document.getElementById('moodSelect').value;
+      
+      if (body.classList.contains('light')) {
+        body.className = currentMood;
+      } else {
+        body.className = 'light ' + currentMood;
+      }
+      
+      console.log(`Theme toggled. Current classes: ${body.className}`);
+    }
+
+    // Initialize on load
+    window.onload = () => {
+      loadMood();
+    };
+
+    // Add smooth transitions when changing moods
+    document.getElementById('moodSelect').addEventListener('change', loadMood);
   </script>
 </body>
 </html>

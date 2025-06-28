@@ -1,5 +1,27 @@
-[
-  "https://www.youtube.com/embed/jfKfPfyJRdk",
-  "https://www.youtube.com/embed/5qap5aO4i9A",
-  "https://www.youtube.com/embed/lTRiuFIWV54"
-]
+{
+  "study": [
+    "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/DWcJFNfaw9c?autoplay=1&loop=1"
+  ],
+  "relax": [
+    "https://www.youtube.com/embed/hHW1oY26kxQ?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/2OEL4P1Rz04?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/lTRiuFIWV54?autoplay=1&loop=1"
+  ],
+  "focus": [
+    "https://www.youtube.com/embed/7NOSDKb0HlU?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/1ZYbU82GVz4?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/9UMxZofMNbA?autoplay=1&loop=1"
+  ],
+  "chill": [
+    "https://www.youtube.com/embed/9iHM6X6uUH8?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/5yx6BWlEVcY?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/tDW2C6rcH6M?autoplay=1&loop=1"
+  ],
+  "sleepy": [
+    "https://www.youtube.com/embed/rUxyKA_-grg?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/_ITiwPMUzho?autoplay=1&loop=1",
+    "https://www.youtube.com/embed/MkGjDbKauVo?autoplay=1&loop=1"
+  ]
+}

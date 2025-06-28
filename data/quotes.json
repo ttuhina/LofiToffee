@@ -1,10 +1,27 @@
 {
   "study": [
-    "Focus is the key to success.",
-    "Study hard, dream big."
+    "Stay focused and never give up.",
+    "Every page gets you closer to your goals.",
+    "Breathe, study, repeat."
   ],
   "relax": [
-    "Take a breath and let it go.",
-    "Peace is found in quiet moments."
+    "Just breathe. You're okay.",
+    "Let the rhythm calm your soul.",
+    "Today, you deserve peace."
+  ],
+  "focus": [
+    "One thing at a time.",
+    "Clarity comes from calm.",
+    "You’re doing great — keep going."
+  ],
+  "chill": [
+    "Let it flow.",
+    "Cool minds create beautiful things.",
+    "Everything’s gonna be alright."
+  ],
+  "sleepy": [
+    "Let your mind drift into dreams.",
+    "The night is gentle and quiet.",
+    "Rest is productive too."
   ]
 }
